@@ -1,0 +1,15 @@
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+.DS_Store
+secrets.json
+deployments
+Deployments.md
+
+#Hardhat files
+cache
+artifacts
+.temp

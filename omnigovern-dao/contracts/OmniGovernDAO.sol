@@ -1,0 +1,245 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.9;
+
+import "@openzeppelin/contracts/governance/Governor.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorSettings.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorCountingSimple.sol";
+import "@openzeppelin/contracts/governance/extensions/GovernorVotes.sol";
+import "@layerzerolabs/solidity-examples/contracts/lzApp/NonblockingLzApp.sol";
+import "./CrossChainGovernorCountingSimple.sol";
+
+
+contract OmniGovernDAO is
+    Governor,
+    GovernorSettings,
+    CrossChainGovernorCountingSimple,
+    GovernorVotes,
+    NonblockingLzApp
+{
+    constructor(
+        IVotes _token,
+        address lzEndpoint,
+        uint16[] memory _spokeChains
+    )
+        Governor("Moonbeam Example Cross Chain DAO")
+        GovernorSettings(
+            1, /* 1 block voting delay */
+            30, /* 30 block voting period */
+            0 /* 0 block proposal threshold */
+        )
+        GovernorVotes(_token)
+        NonblockingLzApp(lzEndpoint)
+        CrossChainGovernorCountingSimple(_spokeChains)
+    {}
+
+    event LzAppToSendThisPayload(bytes);
+
+    // How many blocks to wait until the collection phase is marked as finished, regardless of data received.
+    uint16 collectionPhaseWaitingPeriod;
+
+    function _nonblockingLzReceive(
+        uint16 _srcChainId,
+        bytes memory, /*_srcAddress*/
+        uint64, /*_nonce*/
+        bytes memory _payload
+    ) internal override {
+        uint16 option;
+        assembly {
+            option := mload(add(_payload, 32))
+        }
+
+        // Some options for cross-chain actions are: propose, vote, vote with reason, vote with reason and params, cancel, etc...
+        if (option == 0) {
+            onReceiveSpokeVotingData(_srcChainId, _payload);
+        } else if (option == 1) {
+            // TODO: Feel free to put your own cross-chain actions (propose, execute, etc)...
+        } else {
+            // ...
+        }
+    }
+
+    function onReceiveSpokeVotingData(uint16 _srcChainId, bytes memory payload)
+        internal
+        virtual
+    {
+        (
+            ,
+            uint256 _proposalId,
+            uint256 _pro,
+            uint256 _against,
+            uint256 _abstain
+        ) = abi.decode(payload, (uint16, uint256, uint256, uint256, uint256));
+        if (spokeVotes[_proposalId][_srcChainId].initialized) {
+            revert("Already initialized!");
+        } else {
+            spokeVotes[_proposalId][_srcChainId] = SpokeProposalVote(
+                _pro,
+                _against,
+                _abstain,
+                true
+            );
+        }
+    }
+
+    // Ensures that there is no execution if the collection phase is unfinished
+    function _beforeExecute(
+        uint256 proposalId,
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory calldatas,
+        bytes32 descriptionHash
+    ) internal override {
+        finishCollectionPhase(proposalId);
+
+        require(
+            collectionFinished[proposalId],
+            "Collection phase for this proposal is unfinished!"
+        );
+
+        super._beforeExecute(
+            proposalId,
+            targets,
+            values,
+            calldatas,
+            descriptionHash
+        );
+    }
+
+    // Whether or not the DAO finished the collection phase. It would be more efficient to add Collection as a status
+    // in the Governor interface, but that would require editing the source file. It is a bit out of scope to completely
+    // refactor the OpenZeppelin governance contract for cross-chain action!
+    mapping(uint256 => bool) public collectionFinished;
+    mapping(uint256 => bool) public collectionStarted;
+
+    // Requests the voting data from all of the spoke chains
+    function requestCollections(uint256 proposalId) public payable {
+        require(
+            block.number > proposalDeadline(proposalId),
+            "Cannot request for vote collection until after the vote period is over!"
+        );
+        require(
+            !collectionStarted[proposalId],
+            "Collection phase for this proposal has already started!"
+        );
+
+        collectionStarted[proposalId] = true;
+
+        // Sends an empty message to each of the aggregators. If they receive a message at all,
+        // it is their cue to send data back
+        uint256 crossChainFee = msg.value / spokeChains.length;
+        for (uint16 i = 0; i < spokeChains.length; i++) {
+            bytes memory payload = abi.encode(uint16(1), proposalId);
+            _lzSend({
+                _dstChainId: spokeChains[i],
+                _payload: payload,
+                _refundAddress: payable(address(this)),
+                _zroPaymentAddress: address(0x0),
+                _adapterParams: bytes(""),
+                _nativeFee: crossChainFee
+            });
+        }
+    }
+
+    // Marks a collection phase as true if all of the satellite chains have sent a cross-chain message back
+    function finishCollectionPhase(uint256 proposalId) public {
+        bool phaseFinished = true;
+        for (uint16 i = 0; i < spokeChains.length && phaseFinished; i++) {
+            phaseFinished =
+                phaseFinished &&
+                spokeVotes[proposalId][spokeChains[i]].initialized;
+        }
+
+        collectionFinished[proposalId] = phaseFinished;
+    }
+
+    // Proper proposal function
+    function crossChainPropose(
+        address[] memory targets,
+        uint256[] memory values,
+        bytes[] memory calldatas,
+        string memory description
+    ) public payable virtual returns (uint256) {
+        uint256 proposalId = super.propose(
+            targets,
+            values,
+            calldatas,
+            description
+        );
+
+        // Now send the proposal to all of the other chains
+        // NOTE: You could also provide the time end, but that should be done with a timestamp as well
+        if (spokeChains.length > 0) {
+            uint256 crossChainFee = msg.value / spokeChains.length;
+            for (uint16 i = 0; i < spokeChains.length; i++) {
+                bytes memory payload = abi.encode(
+                    uint16(0),
+                    proposalId,
+                    block.timestamp
+                );
+
+                emit LzAppToSendThisPayload(payload);
+                _lzSend({
+                    _dstChainId: spokeChains[i],
+                    _payload: payload,
+                    _refundAddress: payable(address(this)),
+                    _zroPaymentAddress: address(0x0),
+                    _adapterParams: bytes(""),
+                    _nativeFee: crossChainFee
+                });
+            }
+        }
+
+        return proposalId;
+    }
+
+    // Revert the typical propose because it doesn't allow for "payable"
+    function propose(
+        address[] memory,
+        uint256[] memory,
+        bytes[] memory,
+        string memory
+    ) public virtual override returns (uint256) {
+        revert("Use cross-chain propose!");
+    }
+
+    // Returns the quorum for a block number, in terms of number of votes. To simplify things, we're keeping quorum at a single token.
+    function quorum(uint256) public pure override returns (uint256) {
+        return 1 ether;
+    }
+
+    // =========================================================================================================
+    //                        The following functions are overrides required by Solidity
+    // =========================================================================================================
+
+    /**
+     * @dev Delay, in number of block, between the proposal is created and the vote starts. This can be increassed to
+     * leave time for users to buy voting power, or delegate it, before the voting of a proposal starts.
+     */
+    function votingDelay()
+        public
+        view
+        override(IGovernor, GovernorSettings)
+        returns (uint256)
+    {
+        return super.votingDelay();
+    }
+
+    // Delay, in number of blocks, between the vote start and vote ends
+    function votingPeriod()
+        public
+        view
+        override(IGovernor, GovernorSettings)
+        returns (uint256)
+    {
+        return super.votingPeriod();
+    }
+
+    function proposalThreshold()
+        public
+        view
+        override(Governor, GovernorSettings)
+        returns (uint256)
+    {
+        return super.proposalThreshold();
+    }
+}

@@ -27,11 +27,10 @@ import {
     );
     // Initialize our token contract
     const { contract: token } = useContract(
-      '0x13d250FaAbBE7181787aF8F62a3908C854E1916C',
-      'token',
+      '0x34Afb4Cb3EC4A273968bBa7267A06ff1A37Cd510'
     );
     const { contract: vote } = useContract(
-      '0xc113A4fC316BbD55f9653A43474c1CA8D327E4dC',
+      '0x7baD3A8A1E13be1031e4796D13A37E3E3d154F90',
       'vote',
     );
     // Hook to check if the user has our NFT
@@ -160,17 +159,17 @@ import {
       });
     }, [memberAddresses, memberTokenAmounts]);
 
-    if (address && network[0].data.chain?.id !== 7001) {
-      return (
-        <div className="unsupported-network flex flex-col justify-center">
-          <Text h2>Please connect to ZetaChain</Text>
-          <Text h5 blockquote type = "warning">
-            The DAO is built on the ZetaChain network, please switch networks in
-            your connected wallet.
-          </Text>
-        </div>
-      );
-    }
+    // if (address && network[0].data.chain?.id !== 420) {
+    //   return (
+    //     <div className="unsupported-network flex flex-col justify-center">
+    //       <Text h2>Please connect to OP CHains</Text>
+    //       <Text h5 blockquote type = "warning">
+    //         The DAO is built on the OP network, please switch networks in
+    //         your connected wallet.
+    //       </Text>
+    //     </div>
+    //   );
+    // }
   
     // This is the case where the user hasn't connected their wallet
     // to your web app. Let them call connectWallet.
@@ -185,21 +184,31 @@ import {
   
     // If the user has already claimed their NFT we want to display the interal DAO page to them
     // only DAO members will see this. Render all the members + token amounts.
-    if (hasClaimedNFT) {
+    if (!hasClaimedNFT) {
       return (
         <div className="member-page">
-          <Text h1>🍪DAO Member Page</Text>
+          <Text h1>OmniGovern CrossChain DAO Powered By LayerZero </Text>
           <Text blockquote>Congratulations on being a member!</Text>
           <div>
             <div>
               <Text h2 className = "text-center">Member List</Text>
               <Table data = {memberList}>
+                <h2>0xCF8D2Da12A032b3f3EaDC686AB18551D8fD6c132</h2>
+                <h2>0x0439427C42a099E7E362D86e2Bbe1eA27300f6Cb</h2>
                 <Table.Column prop = 'address' label = "Address" />
                 <Table.Column prop = 'tokenAmount' label = "Token Amount" />
               </Table>
             </div>
             <div>
               <Text h2 className = "text-center">Active Proposals</Text>
+              <h3>Proposal ID: #1</h3>
+              <span>Proposal: This is the Genesis Proposal of dropping 100 Zora NFTs should we drop for our Early Supporters.
+Proposed By: 0xCF8D2Da12A032b3f3EaDC686AB18551D8fD6c132
+
+</span>
+              ✅ Yes: 1 50 Delegated Tokens
+              ❌ No: 2  100 Delegated Tokens
+              🤷‍♂️ Abstain: 0
               <form
                 onSubmit={async (e) => {
                   e.preventDefault();

@@ -129,8 +129,11 @@ const CreateCampaign = () => {
               const { name, title, description, target, deadline, image } = values;
               let t = ethers.utils.parseUnits(target.toString(), 18);
               let dead = deadline.getTime();
-              const data = await createCampaign({ args: [address, {title}, description, t, dead, image] });
+              
+              // Fixing the call to createCampaign. Notice the order and structure of arguments.
+              const data = await createCampaign({ args: [address, title, description, t, dead, image] });
 
+        
               navigate("/dashboard");
             }
           } catch (error: any) {

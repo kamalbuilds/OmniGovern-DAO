@@ -114,7 +114,7 @@ export default function Hero() {
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
-                Empower Dreams, Securely Funded: Fund the best Projects on <b>Zeta</b>Chain<br/> Where Crowdfunding Shakes hands with DAO for Social Good!
+                Empower Dreams, Securely Funded: Fund the best Projects <b>Cross</b>Chain<br/> Where Crowdfunding Shakes hands with DAO for Social Good!
               </p>
               <div
                 className=" flex flex-wrap max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center"

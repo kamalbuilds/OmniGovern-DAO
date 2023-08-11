@@ -2,7 +2,7 @@
 
 ![Omnilogo ](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/9153b62f-aa35-43aa-87f3-53984aade105)
 
-Cross-Chain DAO Management and Governance Reinvented with LayerZero! 💫
+Cross-Chain Crowdfunding Project Backed by OmniGovernDAO , DAO Management and Governance Reinvented with LayerZero , OP Stack Chains , WorldID , Safe! 💫
 
 **📜 Description:** OmniGovern is a comprehensive platform built on LayerZero that simplifies the management and governance of DAOs across multiple blockchains. It leverages the power of LayerZero's cross-chain capabilities to provide seamless interaction between different blockchain networks.
 
@@ -63,7 +63,9 @@ In essence, OmniGovern is your gateway to seamless, transparent, and efficient D
 
 ## Technology Integrations
 
-1. Worldcoin
+### OP Stack Chains
+
+### Worldcoin
 
 Auth0 was setup in the Application to provide users with Sign in with Worldcoin Functionality.
 
@@ -80,7 +82,7 @@ This ensures anonymity -- no personal information is collected, and users cannot
 
 ![image](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/f5aa1a69-09ba-424f-ba14-9edc890c6a02)
 
-2. AA on BaseGorelli + 5 chains for our Users and Relay Transactions Powered by Safe on Base
+### AA on BaseGorelli + 5 chains for our Users and Relay Transactions Powered by Safe on Base
 
-3. OmniGovern EarlySupporters -> https://goerli.basescan.org/address/0xfc82a91d809e4f99236f67b569aebbc6ad7509db\
+### Zora Powered OmniGovern EarlySupporters -> https://goerli.basescan.org/address/0xfc82a91d809e4f99236f67b569aebbc6ad7509db\
 https://testnet.zora.co/collect/basegor:0xfc82a91d809e4f99236f67b569aebbc6ad7509db

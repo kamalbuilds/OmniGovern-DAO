@@ -1,4 +1,4 @@
-import { celo, celoAlfajores, polygon, polygonMumbai } from "wagmi/chains";
+import { celo, celoAlfajores, polygon, polygonMumbai , optimismGoerli , baseGoerli ,  } from "wagmi/chains";
 import { configureChains, Chain , Connector , createClient, goerli } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
