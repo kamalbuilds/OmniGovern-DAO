@@ -53,7 +53,7 @@ export const EthBalance: React.FC = () => {
             <Text className="text-gray-500 text-sm">Updated at {updatedAt}</Text>
             <Divider />
             <Button type="secondary" auto>
-              Button
+              Refresh
             </Button>
           </Card>
         </div>
@@ -72,7 +72,7 @@ export const EthBalance: React.FC = () => {
             <Text className="text-gray-500 text-sm">Updated at {updatedAtbtc}</Text>
             <Divider />
             <Button type="secondary" auto>
-              Button
+              Refresh
             </Button>
           </Card>
         </div>
@@ -91,7 +91,7 @@ export const EthBalance: React.FC = () => {
             <Text className="text-gray-500 text-sm">Updated at {updatedAteur}</Text>
             <Divider />
             <Button type="secondary" auto>
-              Button
+              Refresh
             </Button>
           </Card>
         </div>
