@@ -10,7 +10,6 @@ import { wagmiClient } from "./utils/wagmi_client";
 import { WagmiConfig } from "wagmi";
 import { GeistProvider, CssBaseline, Themes} from "@geist-ui/core";
 import React from "react";
-import { optimismGoerli } from "wagmi/dist/chains";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 
@@ -28,7 +27,7 @@ const myTheme1 = Themes.createFromDark({
 })
 
 root.render(
-  <ThirdwebProvider activeChain={optimismGoerli}>
+  <ThirdwebProvider>
     <WagmiConfig client={wagmiClient}>
       <MantineProvider
         emotionCache={myCache}
