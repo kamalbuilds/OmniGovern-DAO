@@ -17,5 +17,10 @@
     "jsx": "react-jsx"
   },
   "include": ["src", "src/api.ts"],
+  "exclude": [
+    "node_modules",
+    "node_modules/viem/**/*",
+    "node_modules/viem/node_modules/abitype/**/*"
+],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

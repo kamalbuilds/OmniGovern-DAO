@@ -6,6 +6,7 @@ import {
   useContractWrite,
   useDisconnect,
   useMetamask,
+  useChainId,
   useNetwork
 } from "@thirdweb-dev/react";
 import { SmartContract } from "@thirdweb-dev/sdk";
@@ -45,14 +46,18 @@ interface StateProviderProps {
 export const StateProvider = ({ children }: StateProviderProps) => {
   const network = useNetwork();
   let contractAddress;
-
-  if (network && network[0].data.chain?.id == 420) {
+  const chainid = useChainId();
+  console.log(chainid);
+  if (chainid == 420) {
       contractAddress = "0xB706b01638d56866C0905d0d706A86a5AEe662A6";
-  } else if (network && network[0].data.chain?.id == 999) {
+  } else if ( chainid == 999) {
       contractAddress = "0x32AdE66Dcd63bC95A3215C53BF712423550593FB";
-  } else if (network && network[0].data.chain?.id == 84531) {
+  } else if ( chainid == 84531) {
       contractAddress = "0xB3e9A32a99ba815ba7a61A47a0f803beF9841190";
+  } else if ( chainid == 919) {
+      contractAddress = "0x582bEa2a2F17128F1a8D3C26d632feDA5f2CD004";
   }
+  else ( console.log(chainid),"i m here")
 
 //   0xB706b01638d56866C0905d0d706A86a5AEe662A6 Op Gorelli
 // 0x32AdE66Dcd63bC95A3215C53BF712423550593FB Zora Testnet
@@ -69,7 +74,7 @@ export const StateProvider = ({ children }: StateProviderProps) => {
 
   const address = useAddress();
   const connect = useMetamask();
-  console.log(address, network[0].data.chain?.id, "address")
+  console.log(address, chainid, "address")
   // disconnect
   const disconnect = useDisconnect();
 
