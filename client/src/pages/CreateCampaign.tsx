@@ -1,6 +1,4 @@
-// @ts-nocheck
-import { Alert, Container, Grid, Paper} from "@mantine/core";
-import {Grid as GridGeist} from "@geist-ui/core"
+import { Alert, Container, Grid, Paper, Title } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -9,9 +7,6 @@ import Form, { FormProps, FORM_ERROR } from "../components/Form";
 import LabeledTextField from "../components/FormField";
 import LabeledTextAreaField from "../components/TextAreaForm";
 import { useAppState } from "../context";
-import {Text} from "@geist-ui/core"
-import { useContract, useContractWrite } from "@thirdweb-dev/react";
-import { ethers } from "ethers";
 
 export function CampaignForm<S extends z.ZodType<any, any>>(
   props: FormProps<S>
@@ -32,7 +27,7 @@ export function CampaignForm<S extends z.ZodType<any, any>>(
             <Grid.Col md={6}>
               <LabeledTextField
                 name="title"
-                label="Project Title"
+                label="Campaign Title"
                 placeholder="Write a Title"
                 required
               />
@@ -69,8 +64,8 @@ export function CampaignForm<S extends z.ZodType<any, any>>(
             <Grid.Col md={12}>
               <LabeledTextField
                 name="image"
-                label="Project Image "
-                placeholder="Place image url to represent your project"
+                label="Campaign Image "
+                placeholder="Place image url to represent your campaign"
                 required
               />
             </Grid.Col>
@@ -85,7 +80,7 @@ export const CreateCampaignValidation = z.object({
   name: z.string().min(4),
   title: z.string().min(4),
   description: z.string().min(4),
-  target: z.number().min(0.000000),
+  target: z.number().min(0.0000001),
   deadline: z.date(),
   image: z.string().url(),
 });
@@ -95,13 +90,7 @@ export type CreateCampaignValidationType = z.infer<
 >;
 
 const CreateCampaign = () => {
-  const {  address } = useAppState();
-
-  const { contract } = useContract("0xB706b01638d56866C0905d0d706A86a5AEe662A6");
-  console.log(contract,"c")
-  const { mutateAsync: createCampaign, isLoading } = useContractWrite(contract, "createCampaign")
-
-  console.log(createCampaign,"c");
+  const { createCampaign, address } = useAppState();
   const navigate = useNavigate();
 
   if (!address) {
@@ -115,26 +104,21 @@ const CreateCampaign = () => {
   }
   return (
     <div>
-      <Text h2 className = "text-center">
-        List your new Project
-      </Text>
+      <Title align="center" color="orange" order={1}>
+        List your Campaign
+      </Title>
+      <br />
       <CampaignForm
-        submitText="List new project"
+        submitText="Submit new campaign"
         schema={CreateCampaignValidation}
         initialValues={{}}
         onSubmit={async (values) => {
           try {
             if (createCampaign) {
-              console.log("values", values, address);
-              const { name, title, description, target, deadline, image } = values;
-              let t = ethers.utils.parseUnits(target.toString(), 18);
-              let dead = deadline.getTime();
-              
-              // Fixing the call to createCampaign. Notice the order and structure of arguments.
-              const data = await createCampaign({ args: [address, title, description, t, dead, image] });
+              await createCampaign(values);
 
-        
-              navigate("/dashboard");
+              console.log("values", values);
+              navigate("/");
             }
           } catch (error: any) {
             console.error(error);

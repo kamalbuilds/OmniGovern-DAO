@@ -201,11 +201,11 @@ import {
             </div>
             <div>
               <Text h2 className = "text-center">Active Proposals</Text>
+              {/* Dummt data for testing */}
               <h3>Proposal ID: #1</h3>
               <span>Proposal: This is the Genesis Proposal of dropping 100 Zora NFTs should we drop for our Early Supporters.
-Proposed By: 0xCF8D2Da12A032b3f3EaDC686AB18551D8fD6c132
-
-</span>
+              Proposed By: 0xCF8D2Da12A032b3f3EaDC686AB18551D8fD6c132
+              </span>
               ✅ Yes: 1 50 Delegated Tokens
               ❌ No: 2  100 Delegated Tokens
               🤷‍♂️ Abstain: 0

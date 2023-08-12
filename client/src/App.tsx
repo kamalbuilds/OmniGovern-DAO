@@ -12,6 +12,7 @@ import { AssetPriceContext, useAssetPrice } from '../src/context/AssetPriceConte
 import { EthBalance } from '../src/pages/EthBalance';
 import { NFTList } from "./components/Nft/DisplayNFT";
 import OmniGovernDao from "./pages/Dao";
+import Reward from "./pages/Reward";
 
 const App = () => {
   const assetPrice = useAssetPrice();
@@ -33,6 +34,7 @@ const App = () => {
                   <Route path="/analyse" element={<EthBalance />} />
                   <Route path="/allnfts" element={<NFTList />} />
                   <Route path="/dao" element={<OmniGovernDao />} />
+                  <Route path="/reward" element={<Reward />} />
                 </Routes>
               </AppShell>
             }

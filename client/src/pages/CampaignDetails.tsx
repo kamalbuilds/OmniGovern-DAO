@@ -151,9 +151,16 @@ const CampaignDetails = () => {
                 onSubmit={async (values) => {
                   try {
                     if (values.amount) {
-                      console.log(typedState.id,'f');
-                      await donateCampaign([typedState.id], { value: ethers.utils.parseEther(values.amount.toString()) });
-
+                      console.log(typedState.id,'f',ethers.utils.parseEther(values.amount.toString()));
+                      // await donateCampaign([typedState.id], { value: ethers.utils.parseEther(values.amount.toString()) });
+                      await donateCampaign([
+                        typedState.id,
+                        {
+                          value: ethers.utils.parseEther(
+                            values.amount.toString()
+                          ),
+                        },
+                      ]);
                       showNotification({
                         title: "Successfully funded",
                         message: "Thank you for funding this campaign",

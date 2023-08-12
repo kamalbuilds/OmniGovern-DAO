@@ -25,7 +25,6 @@ const Navbar = () => {
           <div key={link.name} className="flex">
             <NavLink
               label={link.name}
-              disabled={link.disabled}
               onClick={() => {
                 buttonToggle(link.name)
                 if (link.name === "logout") {

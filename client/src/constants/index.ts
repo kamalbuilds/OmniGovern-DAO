@@ -25,10 +25,9 @@ export const navlinks = [
     link: "/analyse",
   },
   {
-    name: "Airdrop",
+    name: "Reward",
     imgUrl: withdraw,
-    link: "/airdrop",
-    disabled: true
+    link: "/reward",
   },
   {
     name: "profile",
