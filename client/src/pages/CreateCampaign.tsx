@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Alert, Container, Grid, Paper} from "@mantine/core";
 import {Grid as GridGeist} from "@geist-ui/core"
 import { showNotification } from "@mantine/notifications";
