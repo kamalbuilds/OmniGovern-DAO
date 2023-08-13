@@ -1,21 +1,22 @@
-# 🌐 OmniGovern DAO 
+![readme-removebg-preview](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/d530f0f7-376a-43ba-a88f-0cb453a76c47)
 
-![Omnilogo ](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/9153b62f-aa35-43aa-87f3-53984aade105)
+OmniGovernDAO features a Cross-Chain Crowdfunding Project Backed by OmniGovernDAO , where DAO Management and Governance gets Reinvented with LayerZero , OP Stack Chains , WorldID , Safe! 💫
 
-Cross-Chain Crowdfunding Project Backed by OmniGovernDAO , DAO Management and Governance Reinvented with LayerZero , OP Stack Chains , WorldID , Safe! 💫
-
-**📜 Description:** OmniGovern is a comprehensive platform built on LayerZero that simplifies the management and governance of DAOs across multiple blockchains. It leverages the power of LayerZero's cross-chain capabilities to provide seamless interaction between different blockchain networks.
+**📜 Description:** OmniGovern is a comprehensive platform built on LayerZero that simplifies the management and governance of DAOs across multiple blockchains. It leverages the power of LayerZero's cross-chain capabilities to provide seamless interaction between different blockchain networks. With OFT Voting Contract, now users can vote on Proposals from multiple chains.
 
 **🔗Contracts integral to DAO:**
 
-- Crowdfunding: 
+- Cross-Chain Crowdfunding project deployed on All OP Stack Chains + Hypergrowing Mode Chain: 
 0xB706b01638d56866C0905d0d706A86a5AEe662A6 Op Gorelli
 0x32AdE66Dcd63bC95A3215C53BF712423550593FB Zora Testnet
 0xB3e9A32a99ba815ba7a61A47a0f803beF9841190 Base Gorelli
+0x582bEa2a2F17128F1a8D3C26d632feDA5f2CD004 Mode Testnet
 
 - Membership NFT on Gorelli: 
-- OmniToken(OTK) OmniGovern Governance Token: 0xE6438eC6A31b4229a1BB90481a3ABc7B97AFc8A1 (MultiChain OFT Contract)
-- Voting Contract: 
+- OmniToken(OGT) OmniGovern Governance Token: 
+https://moonbase.moonscan.io/token/0x582bea2a2f17128f1a8d3c26d632feda5f2cd004
+https://goerli-optimism.etherscan.io/token/0x34Afb4Cb3EC4A273968bBa7267A06ff1A37Cd510 (MultiChain OFT Contract)
+
 
 **🛠 Working:** OmniGovern, the master puppeteer, uses smart contracts to conduct the governance spectacle. Members can now propose, debate, and vote on myriad proposals. The voting contract is intimately intertwined with a Cross-chain NFT – your ticket to DAO membership. This NFT is a badge of membership and a passport enabling members to participate in the DAO's cross-chain governance.🌐🗳️
 
@@ -64,6 +65,16 @@ In essence, OmniGovern is your gateway to seamless, transparent, and efficient D
 ## Technology Integrations
 
 ### OP Stack Chains
+Cross-Chain Crowdfunding project deployed on All OP Stack Chains
+
+0xB706b01638d56866C0905d0d706A86a5AEe662A6 Op Gorelli
+0x32AdE66Dcd63bC95A3215C53BF712423550593FB Zora Testnet
+0xB3e9A32a99ba815ba7a61A47a0f803beF9841190 Base Gorelli
+
+### mode
+Our Cross-Chain Crowdfunding project is also deployed on Hypergrowing Mode Chain: 
+
+0x582bEa2a2F17128F1a8D3C26d632feDA5f2CD004 Mode Testnet 
 
 ### Worldcoin
 
@@ -84,5 +95,12 @@ This ensures anonymity -- no personal information is collected, and users cannot
 
 ### AA on BaseGorelli + 5 chains for our Users and Relay Transactions Powered by Safe on Base
 
-### Zora Powered OmniGovern EarlySupporters -> https://goerli.basescan.org/address/0xfc82a91d809e4f99236f67b569aebbc6ad7509db\
+https://github.com/kamalbuilds/AA-on-base
+
+### Zora Powered NFT Drops for OmniGovern EarlySupporters ->
+
+
 https://testnet.zora.co/collect/basegor:0xfc82a91d809e4f99236f67b569aebbc6ad7509db
+
+https://goerli.basescan.org/address/0xfc82a91d809e4f99236f67b569aebbc6ad7509db\
+
