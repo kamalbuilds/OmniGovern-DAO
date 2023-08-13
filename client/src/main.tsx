@@ -28,6 +28,13 @@ const myTheme1 = Themes.createFromDark({
 })
 
 root.render(
+  <Auth0Provider
+    domain="dev-70uoi5j00y55jl5k.us.auth0.com"
+    clientId="FOqCbgSoGq2pH6T2z2j5CxUXWNhomjdT"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+>
   <ThirdwebProvider>
     <WagmiConfig client={wagmiClient}>
       <MantineProvider
@@ -44,13 +51,6 @@ root.render(
         }}
       >
         <NotificationsProvider position="top-right">
-          <Auth0Provider
-            domain="dev-70uoi5j00y55jl5k.us.auth0.com"
-            clientId="FOqCbgSoGq2pH6T2z2j5CxUXWNhomjdT"
-            authorizationParams={{
-              redirect_uri: window.location.origin
-            }}
-          >
           <Router>
             <StateProvider>
               <GeistProvider themes={[myTheme1]} themeType="coolTheme">
@@ -59,9 +59,9 @@ root.render(
               </GeistProvider>
             </StateProvider>
           </Router>
-          </Auth0Provider>
         </NotificationsProvider>
       </MantineProvider>
     </WagmiConfig>
   </ThirdwebProvider>
+  </Auth0Provider>
 );

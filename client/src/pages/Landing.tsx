@@ -2,10 +2,12 @@ import { Grid, Button } from "@geist-ui/core";
 import { ArrowRightCircle } from '@geist-ui/icons'
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Hero() {
   const navigate = useNavigate();
-  
+  const { user, isAuthenticated, isLoading : authloading } = useAuth0();
+  console.log(user, isAuthenticated , authloading , "user");
   const titleRef = useRef<HTMLHeadingElement>(null); 
   return (
     <section
