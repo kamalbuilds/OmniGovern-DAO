@@ -5,11 +5,15 @@ import DisplayCampaigns, {
   DisplayCampaignsProps,
 } from "../components/DisplayCampaigns";
 import { useAppState } from "../context";
+import LoginButton from "../components/LoginButton";
+import LogoutButton from "../components/LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
   const { contract, address } = useAppState();
   const { data, isLoading } = useContractRead(contract, "getCampaigns");
-
+  const { user, isAuthenticated, isLoading : authloading } = useAuth0();
+  console.log(user, isAuthenticated , authloading , "user");
   if (!address) {
     return (
       <div>
@@ -22,8 +26,18 @@ const Profile = () => {
 
   return (
     <div>
+      {isAuthenticated && (
+        <div>
+          <img src={user?.picture} alt="pfp" />
+          <h2>{user?.name}</h2>
+          <p>{user?.email}</p>
+        </div>
+      )}
       {isLoading ? (
+        <>
         <Loader />
+        <LoginButton />
+        </>
       ) : (
         <div>
           <Title align="center" mb={20}>My Campaigns</Title>

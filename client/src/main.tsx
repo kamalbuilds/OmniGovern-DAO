@@ -10,6 +10,7 @@ import { wagmiClient } from "./utils/wagmi_client";
 import { WagmiConfig } from "wagmi";
 import { GeistProvider, CssBaseline, Themes} from "@geist-ui/core";
 import React from "react";
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 
@@ -43,6 +44,13 @@ root.render(
         }}
       >
         <NotificationsProvider position="top-right">
+          <Auth0Provider
+            domain="dev-70uoi5j00y55jl5k.us.auth0.com"
+            clientId="FOqCbgSoGq2pH6T2z2j5CxUXWNhomjdT"
+            authorizationParams={{
+              redirect_uri: window.location.origin
+            }}
+          >
           <Router>
             <StateProvider>
               <GeistProvider themes={[myTheme1]} themeType="coolTheme">
@@ -51,6 +59,7 @@ root.render(
               </GeistProvider>
             </StateProvider>
           </Router>
+          </Auth0Provider>
         </NotificationsProvider>
       </MantineProvider>
     </WagmiConfig>
