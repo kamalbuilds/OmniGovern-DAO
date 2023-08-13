@@ -1,5 +1,7 @@
 # 🌐 OmniGovern DAO 
 
+![Omnilogo ](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/9153b62f-aa35-43aa-87f3-53984aade105)
+
 Cross-Chain DAO Management and Governance Reinvented with LayerZero! 💫
 
 **📜 Description:** OmniGovern is a comprehensive platform built on LayerZero that simplifies the management and governance of DAOs across multiple blockchains. It leverages the power of LayerZero's cross-chain capabilities to provide seamless interaction between different blockchain networks.
