@@ -8,8 +8,9 @@ Cross-Chain DAO Management and Governance Reinvented with LayerZero! 💫
 
 **🔗Contracts integral to DAO:**
 
+- Crowdfunding: 0xB706b01638d56866C0905d0d706A86a5AEe662A6 Op Gorelli
 - Membership NFT on Gorelli: 
-- OmniToken(OTK) OmniGovern Governance Token: 
+- OmniToken(OTK) OmniGovern Governance Token: 0xE6438eC6A31b4229a1BB90481a3ABc7B97AFc8A1 (MultiChain OFT Contract)
 - Voting Contract: 
 
 **🛠 Working:** OmniGovern, the master puppeteer, uses smart contracts to conduct the governance spectacle. Members can now propose, debate, and vote on myriad proposals. The voting contract is intimately intertwined with a Cross-chain NFT – your ticket to DAO membership. This NFT is a badge of membership and a passport enabling members to participate in the DAO's cross-chain governance.🌐🗳️
@@ -55,3 +56,22 @@ If a proposal garners sufficient votes to pass, it steps into the execution phas
 Throughout these steps, OmniGovern interacts with various blockchains. A member could birth a proposal on Ethereum, vote using their NFT on LayerZero, and execute the proposal on the Binance Smart Chain. LayerZero's native cross-chain capabilities facilitate this impressive interoperability. 🌐🔄
 
 In essence, OmniGovern is your gateway to seamless, transparent, and efficient DAO governance across multiple blockchains, empowered by LayerZero's cross-chain prowess – the future of interoperable governance! 💪🌐
+
+## Technology Integrations
+
+1. Worldcoin
+
+Auth0 was setup in the Application to provide users with Sign in with Worldcoin Functionality.
+
+![image](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/2d088cb7-db62-4269-a0ba-53f0c935a44b)
+
+Proves Humanness
+This ensures that every user is a person -- not a bot.
+
+Proves Uniqueness
+This ensures that each user is unique. One person, one account, with uniqueness rules determined by the individual app.
+
+Fully Privacy-Preserving
+This ensures anonymity -- no personal information is collected, and users cannot be tracked between apps.
+
+![image](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/f5aa1a69-09ba-424f-ba14-9edc890c6a02)

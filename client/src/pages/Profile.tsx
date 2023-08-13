@@ -28,9 +28,12 @@ const Profile = () => {
     <div>
       {isAuthenticated && (
         <div>
+          <Title align="center" mb={20}>Your Details</Title>
           <img src={user?.picture} alt="pfp" />
-          <h2>{user?.name}</h2>
+          <h2>👋🏻 {user?.name} </h2>
+          <h2>{user?.address}</h2>
           <p>{user?.email}</p>
+          <LogoutButton />
         </div>
       )}
       {isLoading ? (

@@ -30,7 +30,7 @@ const myTheme1 = Themes.createFromDark({
 root.render(
   <Auth0Provider
     domain="dev-70uoi5j00y55jl5k.us.auth0.com"
-    clientId="FOqCbgSoGq2pH6T2z2j5CxUXWNhomjdT"
+    clientId="xxc6wSKgwXYpOk9QPfsuCJgDkSMhFGda"
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
