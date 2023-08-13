@@ -12,8 +12,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 const Profile = () => {
   const { contract, address } = useAppState();
   const { data, isLoading } = useContractRead(contract, "getCampaigns");
-  const { user, isAuthenticated, isLoading : authloading } = useAuth0();
-  console.log(user, isAuthenticated , authloading , "user");
+  const { user, isAuthenticated, isLoading: authloading } = useAuth0();
+
   if (!address) {
     return (
       <div>
@@ -37,34 +37,34 @@ const Profile = () => {
         </div>
       )}
       {isLoading ? (
-        <>
         <Loader />
-        <LoginButton />
-        </>
       ) : (
         <div>
-          <Title align="center" mb={20}>My Campaigns</Title>
-          {data.filter((item: DisplayCampaignsProps) => item.owner === address)
-            .length === 0 && (
-            <Alert color="red">You have not created any campaigns</Alert>
+          {!isAuthenticated ? (
+            <LoginButton />
+          ) : (
+            <>
+              <Title align="center" mb={20}>My Campaigns</Title>
+              {data.filter((item: DisplayCampaignsProps) => item.owner === address).length === 0 && (
+                <Alert color="red">You have not created any campaigns</Alert>
+              )}
+              <Grid>
+                {data
+                  .filter((item: DisplayCampaignsProps) => item.owner === address)
+                  .map((item: DisplayCampaignsProps, i: number) => {
+                    return (
+                      <DisplayCampaigns
+                        key={i}
+                        {...item}
+                        target={ethers.utils.formatEther(item.target.toString())}
+                        amountCollected={ethers.utils.formatEther(item.amountCollected.toString())}
+                        deadline={new Date(item.deadline.toNumber())}
+                      />
+                    );
+                  })}
+              </Grid>
+            </>
           )}
-          <Grid>
-            {data
-              .filter((item: DisplayCampaignsProps) => item.owner === address)
-              .map((item: DisplayCampaignsProps, i: number) => {
-                return (
-                  <DisplayCampaigns
-                    key={i}
-                    {...item}
-                    target={ethers.utils.formatEther(item.target.toString())}
-                    amountCollected={ethers.utils.formatEther(
-                      item.amountCollected.toString()
-                    )}
-                    deadline={new Date(item.deadline.toNumber())}
-                  />
-                );
-              })}
-          </Grid>
         </div>
       )}
     </div>

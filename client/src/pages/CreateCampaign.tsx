@@ -97,7 +97,8 @@ export type CreateCampaignValidationType = z.infer<
 const CreateCampaign = () => {
   const {  address } = useAppState();
 
-  const { contract } = useContract("0x32AdE66Dcd63bC95A3215C53BF712423550593FB");
+  const { contract } = useContract("0xB706b01638d56866C0905d0d706A86a5AEe662A6");
+  console.log(contract,"c")
   const { mutateAsync: createCampaign, isLoading } = useContractWrite(contract, "createCampaign")
 
   console.log(createCampaign,"c");

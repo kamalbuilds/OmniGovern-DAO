@@ -27,11 +27,11 @@ export const CreateFundValidation = z.object({
 
 const CampaignDetails = () => {
   const { id } = useParams();
-
+  console.log(id, "id here ");  
   const { contract, address } = useAppState();
 
-  const { data, isLoading } = useContractRead(contract, "getCampaign", [id]);
-
+  const { data, isLoading } = useContractRead(contract, "getCampaign", id);
+  console.log(data, "data", isLoading, "isLoading")
 
   const { mutateAsync: donateCampaign } = useContractWrite(
     contract,
@@ -43,7 +43,7 @@ const CampaignDetails = () => {
   }
 
   if(!isLoading){
-    console.log(data , "g")
+    console.log(data , "data has loaded")
   }
   console.log({ data });
   

@@ -8,7 +8,11 @@ Cross-Chain DAO Management and Governance Reinvented with LayerZero! 💫
 
 **🔗Contracts integral to DAO:**
 
-- Crowdfunding: 0xB706b01638d56866C0905d0d706A86a5AEe662A6 Op Gorelli
+- Crowdfunding: 
+0xB706b01638d56866C0905d0d706A86a5AEe662A6 Op Gorelli
+0x32AdE66Dcd63bC95A3215C53BF712423550593FB Zora Testnet
+0xB3e9A32a99ba815ba7a61A47a0f803beF9841190 Base Gorelli
+
 - Membership NFT on Gorelli: 
 - OmniToken(OTK) OmniGovern Governance Token: 0xE6438eC6A31b4229a1BB90481a3ABc7B97AFc8A1 (MultiChain OFT Contract)
 - Voting Contract: 
@@ -75,3 +79,8 @@ Fully Privacy-Preserving
 This ensures anonymity -- no personal information is collected, and users cannot be tracked between apps.
 
 ![image](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/f5aa1a69-09ba-424f-ba14-9edc890c6a02)
+
+2. AA on BaseGorelli + 5 chains for our Users and Relay Transactions Powered by Safe on Base
+
+3. OmniGovern EarlySupporters -> https://goerli.basescan.org/address/0xfc82a91d809e4f99236f67b569aebbc6ad7509db\
+https://testnet.zora.co/collect/basegor:0xfc82a91d809e4f99236f67b569aebbc6ad7509db

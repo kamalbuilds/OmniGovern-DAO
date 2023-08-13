@@ -6,6 +6,7 @@ import {
   useContractWrite,
   useDisconnect,
   useMetamask,
+  useNetwork
 } from "@thirdweb-dev/react";
 import { SmartContract } from "@thirdweb-dev/sdk";
 import { BaseContract, ethers } from "ethers";
@@ -42,9 +43,23 @@ interface StateProviderProps {
 }
 
 export const StateProvider = ({ children }: StateProviderProps) => {
-  const { contract } = useContract( "0x32AdE66Dcd63bC95A3215C53BF712423550593FB"
-    // crowdfunding contract address
-  );
+  const network = useNetwork();
+  let contractAddress;
+
+  if (network && network[0].data.chain?.id == 420) {
+      contractAddress = "0xB706b01638d56866C0905d0d706A86a5AEe662A6";
+  } else if (network && network[0].data.chain?.id == 999) {
+      contractAddress = "0x32AdE66Dcd63bC95A3215C53BF712423550593FB";
+  } else if (network && network[0].data.chain?.id == 84531) {
+      contractAddress = "0xB3e9A32a99ba815ba7a61A47a0f803beF9841190";
+  }
+
+//   0xB706b01638d56866C0905d0d706A86a5AEe662A6 Op Gorelli
+// 0x32AdE66Dcd63bC95A3215C53BF712423550593FB Zora Testnet
+// 0xB3e9A32a99ba815ba7a61A47a0f803beF9841190 Base Gorelli
+  console.log(contractAddress,"address kamal");
+  const { contract } = useContract(contractAddress);
+
 
   const {
     mutateAsync: createCampaign,
@@ -53,9 +68,8 @@ export const StateProvider = ({ children }: StateProviderProps) => {
   } = useContractWrite(contract, "createCampaign");
 
   const address = useAddress();
-
   const connect = useMetamask();
-
+  console.log(address, network[0].data.chain?.id, "address")
   // disconnect
   const disconnect = useDisconnect();
 
