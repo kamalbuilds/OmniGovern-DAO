@@ -1,6 +1,8 @@
 # OmniGovern DAO Contracts
 This is contract code for OmniGovernDAO a cross-chain DAO.
 
+![voting](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/1c68b65f-1b34-498d-9961-349a8c9c2216)
+
 ### Contract Address deployed
 OGT- 
 

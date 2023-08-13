@@ -36,6 +36,8 @@ DAOs, entirely driven by smart contracts, function through a democratic voting p
 
 ## 🔮 DAO's Functioning 
 
+![voting](https://github.com/kamalbuilds/OmniGovern-DAO/assets/95926324/1c68b65f-1b34-498d-9961-349a8c9c2216)
+
 **1. User Registration and NFT Issuance:**
 
 A user's journey with OmniGovern begins with their account registration. This involves verifying their identity and linking their diverse blockchain wallets to their OmniGovern account. Once onboarded, they're issued a Cross-chain NFT, their passport to cross-chain DAO governance. 🛂🎫
