@@ -41,7 +41,6 @@ root.render(
     metamaskWallet(),
     coinbaseWallet(),
     safeWallet(),
-    walletConnect(),
     smartWallet({
       factoryAddress: "0x854b5b26cAF6227eE2fae1999C1d4389eadB6992", //  deployed account factory address on basegorelli
       gasless: true,

@@ -30,22 +30,18 @@ const CampaignDetails = () => {
   console.log(id, "id here ");  
   const { contract, address } = useAppState();
 
-  const { data, isLoading } = useContractRead(contract, "getCampaign", id);
-  console.log(data, "data", isLoading, "isLoading")
+  const { data, isLoading } = useContractRead(contract, "getCampaign", [id]);
 
   const { mutateAsync: donateCampaign } = useContractWrite(
     contract,
     "donateToCampaign"
   );
 
+  console.log(donateCampaign,"d");
+
   if (isLoading) {
     return <Loader />;
   }
-
-  if(!isLoading){
-    console.log(data , "data has loaded")
-  }
-  console.log({ data });
   
   const typedState = {
     ...data,
@@ -55,7 +51,6 @@ const CampaignDetails = () => {
   } as DisplayCampaignsCardProps;
   
 
-  console.log({ typedState });
   const percent = calculateBarPercentage(
     parseFloat(typedState.target),
     parseFloat(typedState.amountCollected)
@@ -151,16 +146,12 @@ const CampaignDetails = () => {
                 onSubmit={async (values) => {
                   try {
                     if (values.amount) {
-                      console.log(typedState.id,'f',ethers.utils.parseEther(values.amount.toString()));
+                      console.log(typedState.id,typedState.id.length,'f',ethers.utils.parseEther(values.amount.toString()));
                       // await donateCampaign([typedState.id], { value: ethers.utils.parseEther(values.amount.toString()) });
-                      await donateCampaign([
-                        typedState.id,
-                        {
-                          value: ethers.utils.parseEther(
-                            values.amount.toString()
-                          ),
-                        },
-                      ]);
+                      await donateCampaign({
+                        args: [typedState.id], 
+                        value: ethers.utils.parseEther(values.amount.toString())
+                      });
                       showNotification({
                         title: "Successfully funded",
                         message: "Thank you for funding this campaign",
